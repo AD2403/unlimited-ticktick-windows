@@ -1,8 +1,5 @@
 name: Build and Release Patched TickTick
 
-env:
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-
 on:
   workflow_dispatch:
     inputs:
@@ -24,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.x'
 
@@ -51,7 +48,7 @@ jobs:
           Compress-Archive -Path "TickTick_Patched.exe" -DestinationPath "TickTick_Patched.zip"
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: Patched TickTick (${{ github.run_number }})
           files: TickTick_Patched.zip
